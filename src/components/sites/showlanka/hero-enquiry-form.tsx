@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useId, useState, type FormEvent } from "react";
 import { EMAIL_RE, ENQUIRY_EMAIL, submitEnquiry } from "./enquiry";
 
@@ -8,6 +9,7 @@ type Errors = Partial<Record<"name" | "email", string>>;
 
 /** Short enquiry form for the home hero; the full form lives on /contact. */
 export function HeroEnquiryForm({ className = "", id }: { className?: string; id?: string }) {
+  const router = useRouter();
   const uid = useId();
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<"" | "sending" | "sent" | "mailto">("");
@@ -36,7 +38,10 @@ export function HeroEnquiryForm({ className = "", id }: { className?: string; id
       page: window.location.pathname,
       website: get("website"),
     });
-    if (result === "sent") form.reset();
+    if (result === "sent") {
+      form.reset();
+      router.push("/thank-you");
+    }
     setStatus(result);
   };
 
@@ -44,7 +49,19 @@ export function HeroEnquiryForm({ className = "", id }: { className?: string; id
 
   return (
     // data-lpignore: LastPass otherwise injects icon <div>s into the labels before hydration.
-    <form id={id} className={`hero-enquiry ${className}`} aria-label="Quick enquiry" noValidate onSubmit={onSubmit} data-lpignore="true">
+    <form
+      id={id}
+      name="showlanka-enquiry"
+      method="post"
+      data-netlify="true"
+      netlify-honeypot="website"
+      className={`hero-enquiry ${className}`}
+      aria-label="Quick enquiry"
+      noValidate
+      onSubmit={onSubmit}
+      data-lpignore="true"
+    >
+      <input type="hidden" name="form-name" value="showlanka-enquiry" />
       <p className="hero-enquiry__title">Plan your Sri Lanka trip</p>
       <div className="hero-enquiry__fields">
         <label className="hero-enquiry__field" htmlFor={fieldId("name")}>

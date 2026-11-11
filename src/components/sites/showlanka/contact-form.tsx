@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import { contactPage } from "./content/pages";
@@ -47,6 +48,7 @@ function Counter({ name, label, value, onChange, invalid }: { name: string; labe
  * Contact Form 7 layout from /contact. Submitted through submitEnquiry().
  */
 export function ContactForm() {
+  const router = useRouter();
   const [arrival, setArrival] = useState("");
   const [departure, setDeparture] = useState("");
   const [counts, setCounts] = useState(NO_TRAVELLERS);
@@ -115,7 +117,11 @@ export function ContactForm() {
       form.reset();
       setArrival("");
       setDeparture("");
+      form.reset();
+      setArrival("");
+      setDeparture("");
       setCounts(NO_TRAVELLERS);
+      router.push("/thank-you");
     }
     setStatus(result);
   };
@@ -129,7 +135,17 @@ export function ContactForm() {
   );
 
   return (
-    <form className="wpcf7-form" aria-label="Contact form" noValidate onSubmit={onSubmit}>
+    <form
+      name="showlanka-enquiry"
+      method="post"
+      data-netlify="true"
+      netlify-honeypot="website"
+      className="wpcf7-form"
+      aria-label="Contact form"
+      noValidate
+      onSubmit={onSubmit}
+    >
+      <input type="hidden" name="form-name" value="showlanka-enquiry" />
       {field("name*", "your-name", "text", errors.name)}
       {field("email*", "your-email", "email", errors.email)}
       {field("telephone", "tel", "tel")}
