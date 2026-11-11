@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import Script from "next/script";
 import { SiteShell } from "@/components/sites/showlanka/site-shell";
 
-const GA_MEASUREMENT_ID = "G-SYV7GXBQ62";
+const GA_MEASUREMENT_ID = "G-MLTTKQY1L0";
 
 export default function ShowlankaLayout({ children }: { children: ReactNode }) {
   return (
