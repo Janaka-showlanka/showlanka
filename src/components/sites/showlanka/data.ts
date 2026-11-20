@@ -30,9 +30,6 @@ export const heroWords = [
 export const tripadvisorUrl =
   "https://www.tripadvisor.com/Attraction_Review-g11999643-d13421293-Reviews-Show_Lanka_Tours-Minuwangoda_Western_Province.html";
 
-export const tourRadarIframe =
-  "https://www.tourradar.com/iframes/reviews_widget_to/237/0/134495/0/0/0/316/409cd1/1?q";
-
 export const packages = [
   { title: "Group wise tours (2)", image: "group.jpg", query: "group" },
   { title: "All year tours (8)", image: "year.jpg", query: "year" },

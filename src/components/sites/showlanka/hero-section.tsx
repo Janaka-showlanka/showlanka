@@ -2,16 +2,17 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from "react";
-import { heroImages, heroWords, tourRadarIframe } from "./data";
-import { DeferredIframe } from "./deferred-iframe";
+import { heroImages, heroWords } from "./data";
 import { HeroEnquiryForm } from "./hero-enquiry-form";
 import { GoogleGIcon } from "./icons";
 import { TripadvisorBadge } from "./tripadvisor-badge";
+import type { TourRadarSummary } from "./tourradar-types";
+import { TourRadarWidget } from "./tourradar-widget";
 
 const SLIDE_INTERVAL = 5000; // Owl Carousel autoplay default
 const WORD_INTERVAL = 5000;
 
-export function HeroSection() {
+export function HeroSection({ tourRadar }: { tourRadar: TourRadarSummary }) {
   const [slide, setSlide] = useState(0);
   // Number of word-rotation ticks. The source's first tick re-activates word 0,
   // so the first word stays up for two intervals.
@@ -85,7 +86,7 @@ export function HeroSection() {
               </a>
             </div>
             <div className="hero-tourradar-widget">
-              <DeferredIframe src={tourRadarIframe} width={240} height={280} scrolling="no" title="TourRadar Reviews" />
+              <TourRadarWidget data={tourRadar} />
             </div>
           </div>
         </div>

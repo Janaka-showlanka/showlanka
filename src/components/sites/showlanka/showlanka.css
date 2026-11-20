@@ -536,14 +536,12 @@
 
 /* zoom (not transform: scale) so the widget's layout box shrinks with it */
 .sl .hero-tourradar-widget { line-height: 0; zoom: 0.6; }
-.sl .hero-tourradar-widget iframe {
-  display: block;
-  border: 0;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
-  width: 240px;
+.sl .hero-tourradar-widget .tr-widget {
   height: 280px;
-  background: #fff;
+  line-height: normal;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
 }
 @media (max-width: 420px) {
   .sl .hero-bottom,
@@ -984,14 +982,75 @@
   background: url("/sites/showlanka/reviews/tourradar-write-review.png") no-repeat;
 }
 .sl .tr-widget__head a { text-decoration: none; }
-.sl .tr-widget__operator {
-  padding: 10px 10px 1px;
-  background-color: #f6f6f6;
-  border-top: 1px solid #409cd1;
-  border-right: 1px solid #409cd1;
-  border-left: 1px solid #409cd1;
+.sl .tr-widget { display: flex; flex-direction: column; background: #fff; }
+.sl .tr-widget__head { flex-shrink: 0; }
+.sl a.tr-widget__summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  padding: 8px 12px;
+  background: #f6f6f6;
+  border: 1px solid #409cd1;
+  border-top: 0;
+  color: #333;
+  text-decoration: none;
+  line-height: 1.2;
 }
-.sl .tr-widget iframe { display: block; width: 240px; height: 280px; }
+.sl .tr-widget__score { font-size: 28px; font-weight: 700; color: #409cd1; }
+.sl .tr-widget__count { display: block; font-size: 12px; margin-top: 2px; }
+.sl .tr-stars { color: #f5a623; font-size: 13px; letter-spacing: 1px; white-space: nowrap; }
+.sl .tr-stars__empty { color: #ccc; }
+.sl .tr-widget__list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  border: 1px solid #409cd1;
+  border-top: 0;
+  overscroll-behavior: contain;
+}
+.sl .tr-review { padding: 10px 12px; border-bottom: 1px solid #e5e5e5; }
+.sl .tr-review__head { display: flex; align-items: center; gap: 8px; }
+.sl .tr-review__avatar {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.sl .tr-review__avatar--initial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #409cd1;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+}
+.sl .tr-review__meta { display: flex; flex-direction: column; flex: 1; min-width: 0; line-height: 1.2; }
+.sl .tr-review__name { font-size: 13px; font-weight: 700; color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sl .tr-review__date { font-size: 11px; color: #888; }
+.sl a.tr-review__tour {
+  display: block;
+  margin: 6px 0 4px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #409cd1;
+  text-decoration: none;
+}
+.sl .tr-review__text { margin: 0; font-size: 12px; line-height: 1.45; color: #444; white-space: pre-line; }
+.sl a.tr-widget__all {
+  display: block;
+  padding: 10px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  color: #409cd1;
+  text-decoration: none;
+}
+.sl a.tr-widget__all:hover,
+.sl a.tr-review__tour:hover { text-decoration: underline; }
 
 /* Trustindex Google reviews slider (layout 6, sidebar, 1 column) */
 /* padding-bottom stands in for the trailing whitespace line of the source's <pre class="ti-widget"> */

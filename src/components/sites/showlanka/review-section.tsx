@@ -2,10 +2,11 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from "react";
-import { ASSETS, googleReviews, tourRadarIframe } from "./data";
-import { DeferredIframe } from "./deferred-iframe";
+import { ASSETS, googleReviews } from "./data";
 import { PlayIcon } from "./icons";
 import { TripadvisorBadge } from "./tripadvisor-badge";
+import type { TourRadarSummary } from "./tourradar-types";
+import { TourRadarWidget } from "./tourradar-widget";
 
 const VIDEO_ID = "Szkym8CIPes";
 const VIDEO_URL = `https://www.youtube.com/watch?v=${VIDEO_ID}&list=PLglAFGJWHrBducvofQ0pYZ9lj8-SpQA2D`;
@@ -50,25 +51,6 @@ function VideoReview() {
           )}
         </div>
       </div>
-    </div>
-  );
-}
-
-function TourRadarWidget() {
-  return (
-    <div className="tr-widget">
-      <div className="tr-widget__head">
-        <a href="https://www.tourradar.com/" target="_blank" title="TourRadar" rel="noopener">
-          <div className="tr-widget__logo" />
-        </a>
-        <a href="https://www.tourradar.com/review#7578-134495" target="_blank" rel="noopener">
-          <div className="tr-widget__write">
-            <span>Leave a review</span>
-          </div>
-        </a>
-      </div>
-      <div className="tr-widget__operator" />
-      <DeferredIframe src={tourRadarIframe} width={240} height={280} scrolling="no" title="TourRadar Reviews" />
     </div>
   );
 }
@@ -189,7 +171,7 @@ function GoogleReviews() {
   );
 }
 
-export function ReviewSection() {
+export function ReviewSection({ tourRadar }: { tourRadar: TourRadarSummary }) {
   return (
     <section className="review-section" id="review-section">
       <div className="container-fluid">
@@ -201,7 +183,7 @@ export function ReviewSection() {
             <div className="row">
               <div className="col-12 col-lg-4 review-content tr-column">
                 <div className="text-content flex-fill">
-                  <TourRadarWidget />
+                  <TourRadarWidget data={tourRadar} />
                 </div>
               </div>
               <div className="col-12 col-lg-4 review-content">
