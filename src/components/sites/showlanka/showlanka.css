@@ -641,7 +641,7 @@
   }
   .sl .hero-enquiry--overlay .hero-enquiry__title { display: none; }
   .sl .hero-enquiry--overlay .hero-enquiry__fields {
-    grid-template-columns: 1fr 1.25fr 1.05fr 1fr 0.55fr auto;
+    grid-template-columns: 1fr 1.2fr 1fr 0.95fr 0.95fr 0.5fr auto;
     align-items: end;
   }
   .sl .hero-enquiry--overlay .hero-enquiry__more,

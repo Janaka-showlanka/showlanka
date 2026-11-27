@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useId, useState, type FormEvent } from "react";
 import { EMAIL_RE, ENQUIRY_EMAIL, submitEnquiry } from "./enquiry";
 
-type Errors = Partial<Record<"name" | "email", string>>;
+type Errors = Partial<Record<"name" | "email" | "arrival" | "departure", string>>;
 
 /** Short enquiry form for the home hero; the full form lives on /contact. */
 export function HeroEnquiryForm({ className = "", id }: { className?: string; id?: string }) {
@@ -24,6 +24,11 @@ export function HeroEnquiryForm({ className = "", id }: { className?: string; id
     if (!get("name")) next.name = "Please enter your name.";
     if (!get("email")) next.email = "Please enter your email.";
     else if (!EMAIL_RE.test(get("email"))) next.email = "Please enter a valid email.";
+    if (!get("arrival")) next.arrival = "Please choose your arrival date.";
+    if (!get("departure")) next.departure = "Please choose your departure date.";
+    else if (get("arrival") && new Date(get("departure")) <= new Date(get("arrival"))) {
+      next.departure = "Departure date must be after the arrival date.";
+    }
     setErrors(next);
     if (Object.keys(next).length) return;
 
@@ -33,6 +38,7 @@ export function HeroEnquiryForm({ className = "", id }: { className?: string; id
       email: get("email"),
       telephone: get("tel"),
       arrival: get("arrival"),
+      departure: get("departure"),
       adults: get("adults"),
       message: "Quick enquiry from the home page hero form.",
       page: window.location.pathname,
@@ -79,8 +85,14 @@ export function HeroEnquiryForm({ className = "", id }: { className?: string; id
           <input id={fieldId("tel")} type="tel" name="tel" autoComplete="tel" inputMode="tel" />
         </label>
         <label className="hero-enquiry__field" htmlFor={fieldId("arrival")}>
-          <span>Arrival date</span>
-          <input id={fieldId("arrival")} type="date" name="arrival" />
+          <span>Arrival date*</span>
+          <input id={fieldId("arrival")} type="date" name="arrival" aria-invalid={!!errors.arrival} aria-required />
+          {errors.arrival && <span className="hero-enquiry__error">{errors.arrival}</span>}
+        </label>
+        <label className="hero-enquiry__field" htmlFor={fieldId("departure")}>
+          <span>Departure date*</span>
+          <input id={fieldId("departure")} type="date" name="departure" aria-invalid={!!errors.departure} aria-required />
+          {errors.departure && <span className="hero-enquiry__error">{errors.departure}</span>}
         </label>
         <label className="hero-enquiry__field hero-enquiry__field--small" htmlFor={fieldId("adults")}>
           <span>Adults</span>

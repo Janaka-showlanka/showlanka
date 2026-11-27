@@ -108,6 +108,13 @@ ${body}
 </table></div>`;
 }
 
+const contactRows = (e: EnquiryInput, email = esc(e.email)) =>
+  rows([
+    ["Name", esc(e.name)],
+    ["Email", email],
+    ["Telephone", esc(e.telephone)],
+    ["Country", esc(e.country)],
+  ]);
 const tripRows = (e: EnquiryInput) =>
   rows([
     ["Arrival", esc(e.arrival)],
@@ -147,10 +154,11 @@ export async function sendThankYouEmail(e: EnquiryInput) {
   const body = `<tr><td colspan="2" style="padding:28px 24px 8px;line-height:1.7;font-size:15px">
 <p style="margin:0 0 14px">Dear ${firstName},</p>
 <p style="margin:0 0 14px"><b>Thank you for your enquiry!</b> We're delighted that you're thinking of exploring Sri Lanka with us.</p>
-<p style="margin:0 0 14px">One of our team members will contact you <b style="color:#047ad9">within 24 hours</b> to help plan your perfect trip.</p>
+<p style="margin:0 0 14px">One of our team members will contact you <b style="color:#047ad9">within 48 hours</b> to help plan your perfect trip.</p>
 </td></tr>
 <tr><td colspan="2" style="padding:4px 24px 20px"><div style="background:#fff7ef;border-left:4px solid #f39a4a;padding:12px 16px;border-radius:4px;font-size:13px;line-height:1.6;color:#5a4632">Need something urgently? Message us on WhatsApp at <b>${WHATSAPP}</b>.</div></td></tr>
 ${section("Your enquiry summary")}
+${contactRows(e)}
 ${tripRows(e)}
 ${section("Your message")}
 ${messageRow(e)}
@@ -160,7 +168,7 @@ ${messageRow(e)}
     to: [e.email],
     reply_to: teamAddresses()[0],
     subject: "Thank you for your enquiry – Show Lanka Tours",
-    html: emailLayout("Thank you for your enquiry", "We'll be in touch within 24 hours", body),
+    html: emailLayout("Thank you for your enquiry", "We'll be in touch within 48 hours", body),
   });
 }
 
@@ -169,12 +177,7 @@ export async function sendEnquiryEmail(id: number | null, e: EnquiryInput) {
   const to = teamAddresses();
   const mail = esc(e.email);
   const body = `${section("Contact details")}
-${rows([
-  ["Name", esc(e.name)],
-  ["Email", `<a href="mailto:${mail}" style="color:#047ad9">${mail}</a>`],
-  ["Telephone", esc(e.telephone)],
-  ["Country", esc(e.country)],
-])}
+${contactRows(e, `<a href="mailto:${mail}" style="color:#047ad9">${mail}</a>`)}
 ${section("Trip details")}
 ${tripRows(e)}
 ${section("Message")}
