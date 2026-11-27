@@ -877,3 +877,117 @@
 .sl-datepicker td button:hover { border-color: #ccc; background: #ededed; }
 .sl-datepicker td button.is-today { border-color: #dad55e; background: #fffa90; color: #777620; }
 .sl-datepicker td button.is-selected { border-color: #003eff; background: #007fff; color: #fff; }
+
+/* ---------- Thank-you page ---------- */
+.sl .thank-you {
+  padding: 6rem 0 4rem;
+  background: linear-gradient(180deg, #f3f5f8 0%, #fff 100%);
+}
+@media (min-width: 992px) {
+  .sl .thank-you { padding: 10rem 0 5rem; }
+}
+.sl .thank-you__card {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(25, 110, 187, 0.1);
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .sl .thank-you__card { padding: 3rem 3.5rem; }
+}
+.sl .thank-you__icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1rem;
+  color: var(--sl-blue);
+}
+.sl .thank-you__title {
+  margin: 0 0 0.75rem;
+  font-size: 28px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #333;
+}
+.sl .thank-you__lead {
+  margin: 0 auto 2rem;
+  max-width: 480px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+.sl .thank-you__steps {
+  display: grid;
+  gap: 1rem;
+  margin: 0 0 2rem;
+  padding: 1.5rem 0;
+  list-style: none;
+  border-top: 1px solid #e6e9ee;
+  border-bottom: 1px solid #e6e9ee;
+  text-align: left;
+}
+@media (min-width: 768px) {
+  .sl .thank-you__steps { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+}
+.sl .thank-you__steps li { display: flex; gap: 0.75rem; align-items: flex-start; }
+.sl .thank-you__steps h2 {
+  margin: 0 0 0.25rem;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+.sl .thank-you__steps p { margin: 0; font-size: 13px; line-height: 1.5; }
+.sl .thank-you__step-num {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--sl-blue);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+}
+.sl .thank-you__contact { margin: 0 0 2rem; }
+.sl .thank-you__contact > p { margin: 0 0 0.75rem; font-weight: 600; color: #333; }
+.sl .thank-you__contact ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sl .thank-you__contact a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--sl-blue);
+  text-decoration: none;
+  font-size: 14px;
+  word-break: break-all;
+}
+.sl .thank-you__contact a:hover { text-decoration: underline; }
+.sl .thank-you__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+}
+.sl .thank-you__secondary {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 7px 32px;
+  border: 1px solid var(--sl-btn);
+  border-radius: 16px;
+  color: var(--sl-btn);
+  text-decoration: none;
+}
+.sl .thank-you__secondary:hover { background: var(--sl-btn); color: #fff; }
