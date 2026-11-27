@@ -611,7 +611,8 @@
   background: #fff;
 }
 .sl .hero-enquiry__field select { appearance: auto; }
-.sl .hero-enquiry__field input[aria-invalid="true"] { border-color: #dc3232; }
+.sl .hero-enquiry__field input[aria-invalid="true"],
+.sl .hero-enquiry__field select[aria-invalid="true"] { border-color: #dc3232; }
 .sl .hero-enquiry__error { color: #dc3232; font-size: 0.75rem; }
 .sl .hero-enquiry__submit {
   height: 40px;
@@ -641,7 +642,7 @@
   }
   .sl .hero-enquiry--overlay .hero-enquiry__title { display: none; }
   .sl .hero-enquiry--overlay .hero-enquiry__fields {
-    grid-template-columns: 1fr 1.2fr 1fr 0.95fr 0.95fr 0.5fr auto;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     align-items: end;
   }
   .sl .hero-enquiry--overlay .hero-enquiry__more,

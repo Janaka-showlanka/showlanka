@@ -7,7 +7,7 @@ import { contactPage } from "./content/pages";
 import { DatePicker } from "./date-picker";
 import { EMAIL_RE, ENQUIRY_EMAIL, submitEnquiry } from "./enquiry";
 
-type Errors = Partial<Record<"name" | "email" | "country" | "arrival" | "departure" | "travellers" | "message", string>>;
+type Errors = Partial<Record<"name" | "email" | "country" | "arrival" | "departure" | "travellers" | "hotel" | "message", string>>;
 
 const REQUIRED = "Please fill out this field.";
 const MAX_COUNT = 50;
@@ -79,6 +79,7 @@ export function ContactForm() {
       next.departure = "Departure date must be after the arrival date.";
     }
     if (Object.values(counts).every((n) => n === 0)) next.travellers = "Please enter at least one traveller.";
+    if (!get("hotel")) next.hotel = REQUIRED;
     if (!get("your-message")) next.message = REQUIRED;
     setErrors(next);
     if (Object.keys(next).length) {
@@ -114,9 +115,6 @@ export function ContactForm() {
     setStatus("sending");
     const result = await submitEnquiry(enquiry);
     if (result === "sent") {
-      form.reset();
-      setArrival("");
-      setDeparture("");
       form.reset();
       setArrival("");
       setDeparture("");
@@ -179,14 +177,18 @@ export function ContactForm() {
         </p>
       </div>
       <p>
-        <span className="label">Hotel category</span>
-        <select name="hotel" aria-label="Hotel category">
+        <span className="label">Hotel category*</span>
+        <select name="hotel" aria-label="Hotel category" defaultValue="" aria-invalid={!!errors.hotel} aria-required>
+          <option value="" disabled>
+            Select
+          </option>
           {contactPage.hotelCategories.map((c) => (
             <option key={c} value={c}>
               {c}
             </option>
           ))}
         </select>
+        {errors.hotel && <span className="field-error">{errors.hotel}</span>}
       </p>
       <p>
         <span className="label">Message*</span>
